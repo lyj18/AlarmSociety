@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCaseTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateCaseLabel_caseID}" for="caseID" />
+                    <h:inputText id="caseID" value="#{caseController.selected.caseID}" title="#{bundle.CreateCaseTitle_caseID}" required="true" requiredMessage="#{bundle.CreateCaseRequiredMessage_caseID}"/>
+                    <h:outputLabel value="#{bundle.CreateCaseLabel_content}" for="content" />
+                    <h:inputText id="content" value="#{caseController.selected.content}" title="#{bundle.CreateCaseTitle_content}" />
+                    <h:outputLabel value="#{bundle.CreateCaseLabel_idpeople}" for="idpeople" />
+                    <h:inputText id="idpeople" value="#{caseController.selected.idpeople}" title="#{bundle.CreateCaseTitle_idpeople}" required="true" requiredMessage="#{bundle.CreateCaseRequiredMessage_idpeople}"/>
+                    <h:outputLabel value="#{bundle.CreateCaseLabel_comment}" for="comment" />
+                    <h:inputText id="comment" value="#{caseController.selected.comment}" title="#{bundle.CreateCaseTitle_comment}" />
+                    <h:outputLabel value="#{bundle.CreateCaseLabel_idpolice}" for="idpolice" />
+                    <h:selectOneMenu id="idpolice" value="#{caseController.selected.idpolice}" title="#{bundle.CreateCaseTitle_idpolice}" required="true" requiredMessage="#{bundle.CreateCaseRequiredMessage_idpolice}">
+                        <f:selectItems value="#{policeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{caseController.create}" value="#{bundle.CreateCaseSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{caseController.prepareList}" value="#{bundle.CreateCaseShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateCaseIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

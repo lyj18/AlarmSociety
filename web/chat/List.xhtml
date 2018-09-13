@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListChatTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListChatEmpty}" rendered="#{chatController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{chatController.items.rowCount > 0}">
+                    <h:outputText value="#{chatController.pagination.pageFirstItem + 1}..#{chatController.pagination.pageLastItem + 1}/#{chatController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{chatController.previous}" value="#{bundle.Previous} #{chatController.pagination.pageSize}" rendered="#{chatController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{chatController.next}" value="#{bundle.Next} #{chatController.pagination.pageSize}" rendered="#{chatController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{chatController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListChatTitle_chatPK_idchat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.chatPK.idchat}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListChatTitle_context}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.context}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListChatTitle_time}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.time}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListChatTitle_idpolice}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idpolice}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListChatTitle_group1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.group1}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListChatTitle_idpeople}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idpeople}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{chatController.prepareView}" value="#{bundle.ListChatViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{chatController.prepareEdit}" value="#{bundle.ListChatEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{chatController.destroy}" value="#{bundle.ListChatDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{chatController.prepareCreate}" value="#{bundle.ListChatCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListChatIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

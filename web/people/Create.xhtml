@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePeopleTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePeopleLabel_idpeople}" for="idpeople" />
+                    <h:inputText id="idpeople" value="#{peopleController.selected.idpeople}" title="#{bundle.CreatePeopleTitle_idpeople}" required="true" requiredMessage="#{bundle.CreatePeopleRequiredMessage_idpeople}"/>
+                    <h:outputLabel value="#{bundle.CreatePeopleLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{peopleController.selected.name}" title="#{bundle.CreatePeopleTitle_name}" />
+                    <h:outputLabel value="#{bundle.CreatePeopleLabel_password}" for="password" />
+                    <h:inputText id="password" value="#{peopleController.selected.password}" title="#{bundle.CreatePeopleTitle_password}" />
+                    <h:outputLabel value="#{bundle.CreatePeopleLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{peopleController.selected.id}" title="#{bundle.CreatePeopleTitle_id}" />
+                    <h:outputLabel value="#{bundle.CreatePeopleLabel_telephone}" for="telephone" />
+                    <h:inputText id="telephone" value="#{peopleController.selected.telephone}" title="#{bundle.CreatePeopleTitle_telephone}" required="true" requiredMessage="#{bundle.CreatePeopleRequiredMessage_telephone}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{peopleController.create}" value="#{bundle.CreatePeopleSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{peopleController.prepareList}" value="#{bundle.CreatePeopleShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePeopleIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

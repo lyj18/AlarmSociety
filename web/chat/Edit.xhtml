@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditChatTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditChatLabel_chatPK_idchat}" for="chatPK_idchat" />
+                    <h:inputText id="chatPK_idchat" value="#{chatController.selected.chatPK.idchat}" title="#{bundle.EditChatTitle_chatPK_idchat}" required="true" requiredMessage="#{bundle.EditChatRequiredMessage_chatPK_idchat}"/>
+                    <h:outputLabel value="#{bundle.EditChatLabel_context}" for="context" />
+                    <h:inputText id="context" value="#{chatController.selected.context}" title="#{bundle.EditChatTitle_context}" required="true" requiredMessage="#{bundle.EditChatRequiredMessage_context}"/>
+                    <h:outputLabel value="#{bundle.EditChatLabel_time}" for="time" />
+                    <h:inputText id="time" value="#{chatController.selected.time}" title="#{bundle.EditChatTitle_time}" required="true" requiredMessage="#{bundle.EditChatRequiredMessage_time}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditChatLabel_idpolice}" for="idpolice" />
+                    <h:selectOneMenu id="idpolice" value="#{chatController.selected.idpolice}" title="#{bundle.EditChatTitle_idpolice}" >
+                        <f:selectItems value="#{policeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditChatLabel_group1}" for="group1" />
+                    <h:selectOneMenu id="group1" value="#{chatController.selected.group1}" title="#{bundle.EditChatTitle_group1}" required="true" requiredMessage="#{bundle.EditChatRequiredMessage_group1}">
+                        <f:selectItems value="#{group1Controller.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditChatLabel_idpeople}" for="idpeople" />
+                    <h:selectOneMenu id="idpeople" value="#{chatController.selected.idpeople}" title="#{bundle.EditChatTitle_idpeople}" required="true" requiredMessage="#{bundle.EditChatRequiredMessage_idpeople}">
+                        <f:selectItems value="#{peopleController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{chatController.update}" value="#{bundle.EditChatSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditChatViewLink}"/>
+                <br />
+                <h:commandLink action="#{chatController.prepareList}" value="#{bundle.EditChatShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditChatIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
